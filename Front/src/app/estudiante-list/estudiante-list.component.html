@@ -1,0 +1,65 @@
+<div class="student-container">
+  <div class="add-student-form">
+    <p-card title="Añadir Estudiante" class="add-student-card">
+      <h2>Añadir Estudiante</h2>
+      <form (ngSubmit)="agregarEstudiante()">
+
+        <p-floatlabel variant="in" class="form-group">
+          <input pInputText id="nombre" [(ngModel)]="nuevoEstudiante.nombre" name="nombre" required />
+          <label for="nombre">Nombre</label>
+        </p-floatlabel>
+
+        <p-float-label variant="in" class="form-group">
+          <input pInputText id="apellido" [(ngModel)]="nuevoEstudiante.apellido" name="apellido" required />
+          <label for="apellido">Apellido</label>
+        </p-float-label>
+
+        <p-float-label variant="in" class="form-group">
+          <input pInputText id="email" [(ngModel)]="nuevoEstudiante.email" name="email" required />
+          <label for="email">Email</label>
+        </p-float-label>
+        <div class="form-group">
+          <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+          <p-datepicker class="form-group" id="fechaNacimiento" [(ngModel)]="nuevoEstudiante.fechaNacimiento"
+            name="fechaNacimiento" showIcon="true" required>
+          </p-datepicker>
+        </div>
+        <p-button class="buttonForm" type="submit" label="Añadir Estudiante" icon="pi pi-plus"
+          class="p-button-success"></p-button>
+      </form>
+    </p-card>
+  </div>
+  <p-card title="Lista de Estudiantes" class="student-list-card">
+    <h2>Lista de Estudiantes</h2>
+    <p-table [value]="estudiantes" [paginator]="true" [rows]="10">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Email</th>
+          <th>Fecha de Nacimiento</th>
+          <th>Acciones</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-estudiante>
+        <tr>
+          <td>{{ estudiante.nombre }}</td>
+          <td>{{ estudiante.apellido }}</td>
+          <td>{{ estudiante.email }}</td>
+          <td>{{ estudiante.fechaNacimiento}}</td>
+          <td>
+            <div class="button-group-nota">
+              <button pButton icon="pi pi-pencil" (click)="editarEstudiante(estudiante.id!)" tooltip="Editar"
+                styleClass="p-button-secondary"></button>
+              <button pButton icon="pi pi-trash" (click)="eliminarEstudiante(estudiante.id!)" tooltip="Eliminar"
+                styleClass="p-button-danger"></button>
+
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+
+
+</div>
